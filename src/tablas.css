@@ -1,0 +1,87 @@
+table {
+  width: 100%;
+  border: 1px solid #CCC;
+  border-radius: 10px !important;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.headerTabla{
+  background-color: #009bc6 !important;
+  color: #FFF !important;
+  border: 1px solid #009bc6 !important;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px !important;
+  
+}
+
+.fila-par {
+  background-color: #ebf4ff; /* gris claro */
+}
+
+.fila-impar {
+  background-color: #ffffff; /* blanco */
+}
+
+.fila-par:hover,
+.fila-impar:hover {
+  background-color: #e0f7fa; /* azul clarito al pasar el mouse */
+  border-bottom: 2px solid #009ee7 !important;
+  border-top: 2px solid #009ee7 !important;
+}
+
+.fila-par, .fila-impar {
+    border-bottom: 2px solid rgba(202, 202, 202, 0.5) !important;
+    cursor: pointer;
+    color: #474747 !important;
+}
+
+.icono-accion {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.icono-edit {
+    color: #037579;
+}
+
+.icono-delete {
+    color: #c14646;
+}
+
+.tooltip-personalizado.mat-mdc-tooltip {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+
+.tooltip-personalizado .mdc-tooltip__surface {
+  background-color: #ffffff !important;
+  color: #333 !important;
+  border: 1px solid #bababa;
+  padding: 6px 10px;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.tooltip-success .mdc-tooltip__surface{
+  /*background-color: #b2fff6 !important;
+  color: #006124 !important;
+  border: 1px solid #009ee7;*/
+}
+
+.tooltip-danger .mdc-tooltip__surface{
+  /*background-color: #ffe2e2 !important;
+  color: #610000 !important;
+  border: 1px solid #ba7979;*/
+}
+
+.inactivo, .activo{
+  color: #c14646;
+  margin-left: 2px;
+}
+
+.activo{
+  color: #037579;
+
+}

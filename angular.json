@@ -25,7 +25,11 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/custom-theme.scss",
+              "src/styles.css",
+              "src/estilos.css",
+              "src/formularios.css",
+              "src/tablas.css"
             ]
           },
           "configurations": {

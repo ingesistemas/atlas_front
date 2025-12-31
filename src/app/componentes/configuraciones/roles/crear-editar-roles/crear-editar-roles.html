@@ -1,0 +1,18 @@
+<div class="contenedor2">
+    <form class="formulario" [formGroup]="formulario" autocomplete="off">
+        <div class="card">
+            <h5 class="card-header tituloFormulario">Crear Rol</h5>
+            <div class="card-body">
+                <div class="contieneInput">
+                    <label for="">Nombre del rol</label>
+                    <input class="form-control form-control-sm mInput" type="text" formControlName="rol">
+                    <small class="smallError">{{ retornaError('rol')}}</small>
+                </div>
+                <div class="card-footer btn-group">
+                    <button (click)="aceptar()" class="btn btn-sm boton">Aceptar</button>
+                    <button routerLink="/principal/roles" class="btn btn-sm botonCancelar">Cancelar</button>
+                </div>   
+            </div>
+        </div>
+    </form>
+</div>

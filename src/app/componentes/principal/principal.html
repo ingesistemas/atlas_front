@@ -1,0 +1,17 @@
+
+
+<div class="contenedor">
+  <h4>Atlas APS - Módulo de administración del sistema</h4>
+
+  <!-- Offcanvas -->
+  <app-cabecera (toggleMenu)="toggleMenu()"></app-cabecera>
+
+  <app-admin [isOpen]="isMenuOpen" (close)="cerrarMenu()"></app-admin>
+
+
+  <!-- Router outlet para rutas hijas -->
+  <router-outlet></router-outlet>
+  <app-toast></app-toast>
+</div>
+
+

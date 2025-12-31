@@ -1,0 +1,14 @@
+.contieneTabla{
+  width: 70%;
+  margin: 0 auto;
+}
+
+.contieneFiltro{
+  width: 40% !important;
+  margin: 0 auto !important;
+}
+
+td, th {
+  width: auto;
+}
+

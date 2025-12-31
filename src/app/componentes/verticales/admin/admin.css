@@ -1,0 +1,34 @@
+/* Fondo semitransparente detrás del offcanvas */
+.offcanvas-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4) !important; /* negro semi-transparente */
+  z-index: 1040; /* menor que el offcanvas */
+  display: none; /* por defecto oculto */
+}
+
+/* Mostrar el backdrop cuando el offcanvas está abierto */
+.offcanvas.show + .offcanvas-backdrop {
+  display: block;
+}
+
+.offcanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 100vh;
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1045;
+}
+
+.offcanvas.show { transform: translateX(0); }
+
+.btn-close { cursor: pointer; }
+

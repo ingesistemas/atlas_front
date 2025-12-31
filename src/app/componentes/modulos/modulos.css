@@ -1,0 +1,26 @@
+/* GLASS CARDS */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:rgba(255,255,255,.7);
+    backdrop-filter:blur(12px);
+    border-radius:22px;
+    padding:40px 30px;
+    box-shadow:0 20px 40px rgba(0,0,0,.08);
+    transition:.4s;
+    text-align:center;
+}
+
+.card:hover{
+    transform:translateY(-12px);
+}
+
+.card i{
+    font-size:46px;
+    color:var(--secondary);
+    margin-bottom:20px;
+}

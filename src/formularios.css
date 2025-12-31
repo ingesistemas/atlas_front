@@ -1,0 +1,50 @@
+.tituloContenedor{
+    color: rgb(11, 161, 184);
+}
+
+.formulario{
+    margin: 20px auto;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    border-radius: 15px;
+}
+
+.card-header{
+    padding: 15px;
+}
+
+.card-footer{
+    border: none;
+    margin-top: 30px;
+    background-color: #FFF;
+    padding-left: 0 !important;
+}
+
+.tituloFormulario{
+    font-weight: bold;
+    color: #3d92a9;
+}
+
+label{
+    color: rgb(0, 103, 150);
+    color: #00799a;
+    font-size: 14px;
+    margin-left: 2px;
+}
+
+.mInput{
+    color: #515151;
+    box-shadow: none;
+}
+
+.mInput:hover, .mInput:focus{
+    color: rgb(0, 72, 106);
+    box-shadow: none;
+    border: 1px solid #00aad9;
+    margin-bottom: 0px !important;
+}
+
+.smallError{
+    color: red;
+    font-size: .8rem;
+    margin-left: 2px;
+}

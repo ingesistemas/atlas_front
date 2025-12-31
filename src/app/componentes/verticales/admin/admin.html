@@ -1,0 +1,59 @@
+<div class="offcanvas p-4" [class.show]="isOpen">
+  <div class="accordion" id="accordionExample">
+    <h5>Configuraciones generales</h5>
+
+    @for (section of accordionData; track section.id; let i = $index) {
+
+      <div class="accordion-item">
+
+        <h2 class="accordion-header" [id]="'heading' + section.id">
+          <button
+            class="accordion-button"
+            [class.collapsed]="i !== 0"
+            type="button"
+            data-bs-toggle="collapse"
+            [attr.data-bs-target]="'#collapse' + section.id"
+            [attr.aria-expanded]="i === 0"
+            [attr.aria-controls]="'collapse' + section.id">
+
+            {{ section.title }}
+          </button>
+        </h2>
+
+        <div
+          [id]="'collapse' + section.id"
+          class="accordion-collapse collapse"
+          [class.show]="i === 0"
+          [attr.aria-labelledby]="'heading' + section.id"
+          data-bs-parent="#accordionExample">
+
+          <div class="accordion-body">
+            <ul class="list-unstyled">
+
+              @for (item of section.items; track item.label) {
+                <li class="mb-2">
+                  <a
+                    [routerLink]="item.link"
+                    class="text-decoration-none d-flex align-items-center">
+
+                    <i [class]="item.icon + ' me-2'"></i>
+                    {{ item.label }}
+                  </a>
+                </li>
+              }
+
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+    }
+
+  </div>
+
+</div>
+
+@if(isOpen){
+  <div class="offcanvas-backdrop"  (click)="cerrar()"></div>
+}
