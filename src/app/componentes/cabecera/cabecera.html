@@ -2,16 +2,17 @@
   <div class="nav">
     
     <div class="logo">
-      <i class="fa-solid fa-list" (click)="abrirOffcanvas()"></i>
+      <i class="fa-solid fa-list iconoMenuCabecera" (click)="abrirOffcanvas()"></i>
       ATLAS <span>APS</span>
     </div>
     <nav>
       
-      <a routerLink="/">Inicio</a>
-      <a routerLink="/principal">configuración</a>
-      <a href="#modulos">Módulos</a>
-      <a href="#como">Cómo funciona</a>
+      <a routerLink="/" class="opcionHorizontal">Inicio</a>
+      <a routerLink="/principal" class="opcionHorizontal">configuración</a>
+      <a href="#modulos" class="opcionHorizontal">Módulos</a>
+      <a href="#como" class="opcionHorizontal">Cómo funciona</a>
       <a href="#contacto" class="cta">Solicitar demo</a>
+      <a routerLink="/principal/ingresar" class="cta">Ingresar</a>
     </nav>
   </div>
 </header>

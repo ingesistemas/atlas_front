@@ -43,9 +43,7 @@ export class PeticionServicio {
     const headers = new HttpHeaders({});
     return this.http.post<any>(this.apiUrl + url, datos, { headers }).pipe(
       map(res => res),
-      catchError(err =>
-        throwError(() => new Error(err.error?.message || 'Error en POST'))
-      )
+      catchError(err => throwError(() => err.error)) // <-- Cambio
     );
   }
 
@@ -53,9 +51,7 @@ export class PeticionServicio {
     const headers = new HttpHeaders({});
     return this.http.put<any>(this.apiUrl + url, datos, { headers }).pipe(
       map(res => res),
-      catchError(err =>
-        throwError(() => new Error(err.error?.message || 'Error en PUT'))
-      )
+      catchError(err => throwError(() => err.error)) // <-- Cambio
     );
   }
 
@@ -67,18 +63,14 @@ export class PeticionServicio {
       body: datos
     }).pipe(
       map(res => res),
-      catchError(err =>
-        throwError(() => new Error(err.error?.message || 'Error en DELETE'))
-      )
+      catchError(err => throwError(() => err.error)) // <-- Cambio
     );
   }
 
   private peticionGET(url: string): Observable<any> {
     return this.http.get<any>(this.apiUrl + url).pipe(
       map(res => res),
-      catchError(err =>
-        throwError(() => new Error('Error en GET'))
-      )
+       catchError(err => throwError(() => err.error)) // <-- Cambio
     );
   }
 }

@@ -2,23 +2,47 @@
 
     <div class="mat-elevation-z8 contieneTabla">
         <div class="d-flex align-items-center justify-content-between">
-            <h1 class="tituloContenedor">Roles</h1>
+            <h1 class="tituloContenedor">Empresas</h1>
             <mat-form-field class="contieneFiltro" appearance="outline">
                 <mat-label>Buscar por...</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Buscar por..." #input >
             </mat-form-field>
-            <button class="btn boton" routerLink="/principal/crear-editar-rol">
-                Crear rol
+            <button class="btn boton" routerLink="/principal/crear-editar-empresas">
+                Crear Empresa
             </button>
         </div>
 
         <table mat-table [dataSource]="dataSource" matSort>
-            <!-- Rol Column -->
-            <ng-container matColumnDef="rol">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
-                <td mat-cell *matCellDef="let row"> {{row.rol}}</td>
+            <ng-container matColumnDef="nit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> NIT </th>
+                <td mat-cell *matCellDef="let row"> {{row.nit}}-{{row.dig_ver}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                <td mat-cell *matCellDef="let row"> {{row.nombre}}</td>
             </ng-container>
 
+            <ng-container matColumnDef="ciudad">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ciudad </th>
+                <td mat-cell *matCellDef="let row"> {{row.ciudad.ciudad}} {{row.ciudad.dpto.departamento}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                <td mat-cell *matCellDef="let row"> {{row.email}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="web">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Web </th>
+                <td mat-cell *matCellDef="let row"> {{row.web}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="lema">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Lema </th>
+                <td mat-cell *matCellDef="let row"> {{row.lema}}</td>
+            </ng-container>
+            
             <!-- Creado Column -->
             <ng-container matColumnDef="create_at">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Creado </th>
@@ -41,10 +65,7 @@
                         <i class="fa-regular fa-circle-check icono-accion icono-edit" 
                         matTooltip="Activar el registro." matTooltipClass="tooltip-personalizado" 
                         matTooltipPosition="right" (click)="estado(row)"><small class="inactivo">Inactivo</small></i>
-                    }
-                    
-
-                    
+                    }                    
                 </td>
             </ng-container>
 

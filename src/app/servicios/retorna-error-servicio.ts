@@ -24,6 +24,8 @@ export class RetornaErrorServicio {
           return `Máximo ${errores['maxlength'].requiredLength} caracteres.`;
         case 'pattern':
           return `Verifica, pues se ha presentado un error en el formato.`;
+        case 'min':
+          return `El valor mínimo debe ser ${errores['min'].min}`;
       }
     }
 

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { A11yModule } from "@angular/cdk/a11y";
 
 @Component({
   selector: 'app-admin',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, A11yModule],
   templateUrl: './admin.html',
   styleUrl: './admin.css',
 })
@@ -37,9 +38,9 @@ export class Admin {
           link: '/principal/roles'
         },
         {
-          label: 'Barrios',
+          label: 'Empresas',
           icon: 'bi bi-bell',
-          link: '/barrios'
+          link: '/principal/empresas'
         }
       ]
     }

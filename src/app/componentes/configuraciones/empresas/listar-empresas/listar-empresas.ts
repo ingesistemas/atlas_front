@@ -1,26 +1,26 @@
-import { Router, RouterLink } from "@angular/router";
-import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Component, inject, ViewChild } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { PeticionServicio } from "../../../../servicios/peticion-servicio";
-import { CommonModule, DatePipe } from "@angular/common";
-import { MatTooltipModule } from "@angular/material/tooltip";
-import { CargandoServicio } from "../../../../servicios/cargando-servicio";
-import { timeout } from "rxjs";
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router, RouterLink } from '@angular/router';
+import { PeticionServicio } from '../../../../servicios/peticion-servicio';
+import { CargandoServicio } from '../../../../servicios/cargando-servicio';
 
 export interface ItemTabla {
   id: string;
-  rol: string;
+  nit: string;
+  nombre: string;
+  id_ciudad: number;
   activo: number; // o boolean;
   created_at: string;
 }
 
 @Component({
-  selector: 'app-listar-roles',
-  standalone: true,
+  selector: 'app-listar-empresas',
   imports: [
     RouterLink,
     MatFormFieldModule,
@@ -32,13 +32,12 @@ export interface ItemTabla {
     CommonModule,
     MatTooltipModule
   ],
-  templateUrl: './listar-roles.html',
-  styleUrl: './listar-roles.css',
+  templateUrl: './listar-empresas.html',
+  styleUrl: './listar-empresas.css',
 })
-export class ListarRoles implements OnInit, AfterViewInit {
-
-  displayedColumns: string[] = ['rol', 'create_at', 'opciones'];
-  dataSource: MatTableDataSource<ItemTabla> = new MatTableDataSource<ItemTabla>([]);
+export class ListarEmpresas {
+  displayedColumns: string[] = ['nit', 'nombre', 'ciudad', 'email', 'web', 'lema', 'create_at', 'opciones'];
+  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   mensaje: string = '';
   datos: any = [];
 
@@ -52,16 +51,26 @@ export class ListarRoles implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.cargadoServicio.open('Cargando registros...')
     // 🔹 Filtro personalizado
-    this.dataSource.filterPredicate = (data: ItemTabla, filter: string) => {
+    this.dataSource.filterPredicate = (data: any, filter: string) => {
       const texto = filter.trim().toLowerCase();
+
       return (
-        data.id.toString().toLowerCase().includes(texto) ||
-        data.rol.toLowerCase().includes(texto) ||
+        data.id.toString().includes(texto) ||
+        data.nit?.toLowerCase().includes(texto) ||
+        data.nombre?.toLowerCase().includes(texto) ||
+        data.ciudad?.ciudad?.toLowerCase().includes(texto) ||
+        data.ciudad?.dpto?.departamento?.toLowerCase().includes(texto) ||
+        data.lema?.toLowerCase().includes(texto) ||
         (data.created_at?.toLowerCase().includes(texto) ?? false)
       );
+      
     };
 
-    this.peticion('/roles');
+    this.peticion('/empresas');
+    setTimeout(()=>{
+      this.cargadoServicio.close()
+    },1000)
+    
   }
 
   ngAfterViewInit(): void {
@@ -78,18 +87,18 @@ export class ListarRoles implements OnInit, AfterViewInit {
     }
   }
 
-  editar(rol: any): void {
-    this.router.navigate(['/principal/crear-editar-rol'], {
-      state: { datos: rol }
+  editar(empresa: any): void {
+    this.router.navigate(['/principal/crear-editar-empresas'], {
+      state: { datos: empresa }
     });
   }
 
-  estado(rol: any): void {
+  estado(empresa: any): void {
     this.cargadoServicio.open('Actualizando estado...');
-    const id = rol.id;
+    const id = empresa.id;
 
     this.peticionServicio
-    .peticion(`/roles/${id}`, null, 'DELETE')
+    .peticion(`/empresas/${id}`, null, 'DELETE')
     .subscribe({
       next: (resp) => {
         this.mensaje = resp.mensaje;
@@ -97,11 +106,11 @@ export class ListarRoles implements OnInit, AfterViewInit {
         // 🔹 1. Copia del array
         const data = [...this.dataSource.data];
 
-        // 🔹 2. Buscar índice del rol
+        // 🔹 2. Buscar índice del empresa
         const index = data.findIndex(r => r.id === id);
 
         if (index !== -1) {
-          // 🔹 3. Reemplazar con el rol actualizado
+          // 🔹 3. Reemplazar con el empresa actualizado
           data[index] = {
             ...data[index],
             activo: resp.data.activo

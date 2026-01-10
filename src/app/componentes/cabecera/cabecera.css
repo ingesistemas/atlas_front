@@ -1,0 +1,23 @@
+.iconoMenuCabecera:hover{
+    cursor: pointer;
+    background-color: rgb(247, 247, 247);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.iconoMenuCabecera{
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.opcionHorizontal{
+    padding: 3px;
+
+}
+
+.opcionHorizontal:hover{
+    color: rgb(0, 99, 101);
+    border-bottom: 2px solid green;
+    border-top: 2px solid green;
+    background-color: rgb(246, 246, 246);
+}

@@ -1,0 +1,77 @@
+<div class="contenedor2">
+    <form class="formulario" [formGroup]="formulario" autocomplete="off">
+        <div class="card">
+            <h5 class="card-header tituloFormulario">{{ titulo }}</h5>
+            <div class="card-body">
+                <div class="row">
+                    <div class="contieneInput col-md-9">
+                        <label for="">NIT</label>
+                        <input class="form-control form-control-sm mInput" type="text" formControlName="nit">
+                        <small class="smallError">{{ retornaError('nit')}}</small>
+                    </div>
+
+                    <div class="contieneInput col-md-3">
+                        <label for="">D. verif.</label>
+                        <input class="form-control form-control-sm mInput" type="text" formControlName="dig_ver">
+                        <small class="smallError">{{ retornaError('dig_ver')}}</small>
+                    </div>
+                </div>
+                
+
+                <div class="contieneInput">
+                    <label for="">Nombre</label>
+                    <input class="form-control form-control-sm mInput" type="text" formControlName="nombre">
+                    <small class="smallError">{{ retornaError('nombre')}}</small>
+                </div>
+
+                <div class="contieneInput">
+                    <label for="">Email</label>
+                    <input class="form-control form-control-sm mInput" type="email" formControlName="email">
+                    <small class="smallError">{{ retornaError('email')}}</small>
+                </div>
+
+                <div class="contieneInput">
+                    <label for="">Web</label>
+                    <input class="form-control form-control-sm mInput" type="text" formControlName="web">
+                    <small class="smallError">{{ retornaError('web')}}</small>
+                </div>
+
+                <div class="contieneInput">
+                    <label for="">Lema</label>
+                    <input class="form-control form-control-sm mInput" type="text" formControlName="lema">
+                    <small class="smallError">{{ retornaError('lema')}}</small>
+                </div>
+
+                <div class="row">
+                    <div class="contieneInput col-md-6">
+                        <label for="">Departamento</label>
+                        <select class="form-select form-select-sm mInput" formControlName="id_dpto" 
+                            (change)="filtrarCiudades($any($event.target).value)">
+                            <option value="">Seleccione...</option>
+                            @for (dpto of dptos; track $index) {
+                                <option value="{{dpto.cod_dep}}">{{ dpto.departamento }}</option>
+                            }
+                        </select>
+                        <small class="smallError">{{ retornaError('id_depto')}}</small>
+                    </div>
+
+                    <div class="contieneInput col-md-6">
+                        <label for="">Ciudad</label>
+                        <select class="form-select form-select-sm mInput" formControlName="id_ciudad">
+                            <option value="">Seleccione...</option>
+                            @for (ciudad of filtroCiudades; track $index) {
+                                <option value="{{ciudad.id}}">{{ ciudad.ciudad }}</option>
+                            }
+                        </select>
+                        <small class="smallError">{{ retornaError('id_ciudad')}}</small>
+                    </div>
+                </div>
+
+                <div class="card-footer btn-group">
+                    <button (click)="aceptar()" class="btn btn-sm boton">Aceptar</button>
+                    <button routerLink="/principal/empresas" class="btn btn-sm botonCancelar">Cancelar</button>
+                </div>   
+            </div>
+        </div>
+    </form>
+</div>
