@@ -1,4 +1,4 @@
-<header>
+<!-- <header>
   <div class="nav">
     
     <div class="logo">
@@ -13,6 +13,63 @@
       <a href="#como" class="opcionHorizontal">Cómo funciona</a>
       <a href="#contacto" class="cta">Solicitar demo</a>
       <a routerLink="/principal/ingresar" class="cta">Ingresar</a>
+    </nav>
+  </div>
+</header> -->
+<header>
+  <div class="nav">
+    <div class="logo">
+      @if(datosTempServicio.user()?.atlas == 1){
+        <i class="fa-solid fa-list iconoMenuCabecera" (click)="abrirOffcanvas()"></i>
+      }
+      ATLAS <span>APS</span>
+      <div>
+        <small>{{ datosTempServicio.user()?.empresa }} - {{ datosTempServicio.user()?.ciudad }}</small>
+      </div>
+    
+    </div>
+    
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="margin-right: 50px;">
+      <div class="container-fluid">
+       
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link opcionHorizontal" aria-current="page" routerLink="/">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link opcionHorizontal" href="#">Link</a>
+            </li>
+            <li class="nav-item pt-2">
+              <a href="#contacto " class="cta">Solicitar demo</a>
+            </li>
+            
+            @if(datosTempServicio.user()?.id){
+              
+              <li class="nav-item dropdown">
+              
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ datosTempServicio.user()?.email }}
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" >{{ datosTempServicio.user()?.email }}</a></li>
+                    <li><a class="dropdown-item" >Datos personales</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item-danger" (click)="cerrarSesion()" >Cerrar sesión</a></li>
+                </ul>
+              </li>
+            }@else {
+              <li class="nav-item pt-2">
+                <a routerLink="/ingresar" class="cta">Ingresar</a>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
     </nav>
   </div>
 </header>

@@ -9,18 +9,18 @@ import { PeticionServicio } from "../../../../servicios/peticion-servicio";
 import { CommonModule, DatePipe } from "@angular/common";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { CargandoServicio } from "../../../../servicios/cargando-servicio";
-import { timeout } from "rxjs";
+import { PCardinalPipe } from "../../../../pipes/p-cardinal-pipe";
 
 export interface ItemTabla {
   id: string;
-  email: string;
-  rol: string;
+  localidad: string;
+  p_cardinal: string;
   activo: number; // o boolean;
   created_at: string;
 }
 
 @Component({
-  selector: 'app-listar-usuarios',
+  selector: 'app-listar-localidades',
   imports: [
     RouterLink,
     MatFormFieldModule,
@@ -30,13 +30,14 @@ export interface ItemTabla {
     MatInputModule,
     DatePipe,
     CommonModule,
-    MatTooltipModule
+    MatTooltipModule,
+    PCardinalPipe
   ],
-  templateUrl: './listar-usuarios.html',
-  styleUrl: './listar-usuarios.css',
+  templateUrl: './listar-localidades.html',
+  styleUrl: './listar-localidades.css',
 })
-export class ListarUsuarios {
-  displayedColumns: string[] = ['email', 'rol', 'created_at', 'opciones'];
+export class ListarLocalidades {
+  displayedColumns: string[] = ['localidad', 'p_cardinal', 'create_at', 'opciones'];
   dataSource: MatTableDataSource<ItemTabla> = new MatTableDataSource<ItemTabla>([]);
   mensaje: string = '';
   datos: any = [];
@@ -55,12 +56,13 @@ export class ListarUsuarios {
       const texto = filter.trim().toLowerCase();
       return (
         data.id.toString().toLowerCase().includes(texto) ||
-        data.email.toLowerCase().includes(texto) ||
+        data.localidad.toLowerCase().includes(texto) ||
+        data.p_cardinal.toLowerCase().includes(texto) ||
         (data.created_at?.toLowerCase().includes(texto) ?? false)
       );
     };
 
-    this.peticion('/usuarios');
+    this.peticion('/localidades');
   }
 
   ngAfterViewInit(): void {
@@ -77,18 +79,18 @@ export class ListarUsuarios {
     }
   }
 
-  editar(usuario: any): void {
-    this.router.navigate(['/principal/crear-editar-usuario'], {
-      state: { datos: usuario }
+  editar(localidad: any): void {
+    this.router.navigate(['/principal/crear-editar-localidad'], {
+      state: { datos: localidad }
     });
   }
 
-  estado(usuario: any): void {
+  estado(localidad: any): void {
     this.cargadoServicio.open('Actualizando estado...');
-    const id = usuario.id;
+    const id = localidad.id;
 
     this.peticionServicio
-    .peticion(`/usuarios/${id}`, null, 'DELETE')
+    .peticion(`/localidad/${id}`, null, 'DELETE')
     .subscribe({
       next: (resp) => {
         this.mensaje = resp.mensaje;
@@ -96,11 +98,11 @@ export class ListarUsuarios {
         // 🔹 1. Copia del array
         const data = [...this.dataSource.data];
 
-        // 🔹 2. Buscar índice del usuario
+        // 🔹 2. Buscar índice de la localidad
         const index = data.findIndex(r => r.id === id);
 
         if (index !== -1) {
-          // 🔹 3. Reemplazar con el usuario actualizado
+          // 🔹 3. Reemplazar con la localidad actualizado
           data[index] = {
             ...data[index],
             activo: resp.data.activo
@@ -114,7 +116,9 @@ export class ListarUsuarios {
     setTimeout(()=>{
         this.cargadoServicio.close()
     }, 1000)
+    
   }
+
 
   // 🔹 PETICIÓN USANDO EL MÉTODO UNIFICADO
   peticion(url: string): void {
@@ -122,7 +126,6 @@ export class ListarUsuarios {
     .peticion(url, this.datos, 'GET')
     .subscribe({
       next: (data) => {
-        console.log(data)
         this.mensaje = data.mensaje;
         this.dataSource.data = data.data;
       }

@@ -22,7 +22,7 @@ export class Toast {
       this.type = data.type || 'info';
 
       const toast = new bootstrap.Toast(this.toastEl.nativeElement, {
-        delay: 800
+        delay: 2000
       });
       toast.show();
     });

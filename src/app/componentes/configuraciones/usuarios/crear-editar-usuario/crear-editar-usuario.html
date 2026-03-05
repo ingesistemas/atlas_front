@@ -1,0 +1,29 @@
+<div class="contenedor2">
+    <form class="formulario" [formGroup]="formulario" autocomplete="off">
+        <div class="card">
+            <h5 class="card-header tituloFormulario">{{ titulo }}</h5>
+            <div class="card-body">
+                <div class="contieneInput">
+                    <label for="">Correo electrónico</label>
+                    <input class="form-control form-control-sm mInput" type="text" formControlName="email">
+                    <small class="smallError">{{ retornaError('email')}}</small>
+                </div>
+                <div class="contieneInput">
+                    <label for="">Contraseña</label>
+                    <input class="form-control form-control-sm mInput" type="password" formControlName="clave">
+                    <small class="smallError">{{ retornaError('clave')}}</small>
+                </div>
+                <div class="contieneInput">
+                    <label for="">Confirmar contraseña</label>
+                    <input class="form-control form-control-sm mInput" type="password" formControlName="clave2">
+                    <small class="smallError">{{ retornaError('clave2')}}</small>
+                </div>
+
+                <div class="card-footer btn-group">
+                    <button (click)="aceptar()" class="btn btn-sm boton">Aceptar</button>
+                    <button routerLink="/principal/usuarios" class="btn btn-sm botonCancelar">Cancelar</button>
+                </div>   
+            </div>
+        </div>
+    </form>
+</div>

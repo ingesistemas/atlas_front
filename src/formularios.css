@@ -48,3 +48,7 @@ label{
     font-size: .8rem;
     margin-left: 2px;
 }
+
+select{
+    cursor: pointer;
+}

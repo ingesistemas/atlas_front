@@ -5,11 +5,13 @@ import { RetornaErrorServicio } from '../../servicios/retorna-error-servicio';
 import { PeticionServicio } from '../../servicios/peticion-servicio';
 import { CargandoServicio } from '../../servicios/cargando-servicio';
 import { ToastServicio } from '../../servicios/toast-servicio';
+import { DatosTempServicios } from '../../servicios/datos-temp-servicios';
+import { Toast } from "../toast/toast";
 
 
 @Component({
   selector: 'app-ingresar',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, Toast],
   templateUrl: './ingresar.html',
   styleUrl: './ingresar.css',
 })
@@ -20,15 +22,16 @@ export class Ingresar {
     private peticionServicio = inject(PeticionServicio);
     private router = inject(Router);
     private cargadoServicio = inject(CargandoServicio)
+    private datosTemServicio = inject(DatosTempServicios)
   
     mensaje: string = '';
     usuario: any = null;
   
     formulario = this.fb.group({
       id: [0],
-      nit: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      clave: ['', [Validators.required]],
+      nit: ['900900900', [Validators.required]],
+      email: ['ingesistemas.silva@gmail.com', [Validators.required]],
+      clave: ['001', [Validators.required]],
     });
 
     ingresar(): void {
@@ -45,76 +48,47 @@ export class Ingresar {
       let tipoPeticion: 'POST' | 'PUT' = 'POST';
       this.cargadoServicio.open('Validando acceso...');
       
-      this.peticionServicio
-      .peticion(url, datos, tipoPeticion)
-      .subscribe({
-        next: (data) => {
-          console.log(data)
-          if (data.error) {
-            this.toastService.show(data.mensaje, 'danger');
-          } else {
-            this.toastService.show(data.mensaje, 'success');
-            //this.router.navigateByUrl('/usuarios');
+      this.peticionServicio.peticion('/usuarios/ingresar',
+        {
+          nit: this.formulario.value.nit,
+          email: this.formulario.value.email,
+          clave: this.formulario.value.clave
+        },
+        'POST'
+      ).subscribe({
+        next: (res) => {
+          if(res.error){
+            setTimeout(()=>{
+              this.cargadoServicio.close()
+              this.toastService.show(res.mensaje, 'danger')
+            },1000)
+          }else{
+            this.toastService.show(res.mensaje, 'success')
+            localStorage.setItem('token', res.token);
+            //console.log('TOKEN GUARDADO:', res.token);
+            console.log(res)
+
+            // 2️⃣ Guardas el usuario en el estado (SIGNAL)
+            this.datosTemServicio.setUser({
+              id: res.user.id,
+              email: res.user.email,
+              atlas: res.user.atlas,
+              id_ciudad: res.user.id_ciudad,
+              empresa: res.user.empresa,
+              ciudad: res.user.ciudad
+            });
+            this.router.navigateByUrl("/principal")
           }
+          
+        },
+        error: (err) => {
+          console.error(err);
+          setTimeout(()=>{
+            this.cargadoServicio.close()
+          },1000)
         }
       });
-      setTimeout(()=>{
-        this.cargadoServicio.close()
-      },1000)
     }
-  
-    /* ngOnInit(): void {
-      this.usuario = history.state?.datos;
-  
-      if (this.usuario) {
-        this.formulario.patchValue({
-          id: this.usuario.id,
-          email: this.usuario.email,
-        });
-      }
-    } */
-  
-    /* aceptar(): void {
-      if (this.formulario.invalid) {
-        this.formulario.markAllAsTouched();
-        this.toastService.show(
-          'Algunos campos necesitan corrección.',
-          'danger'
-        );
-        return;
-      }
-  
-      const datos = this.formulario.value;
-      const id = datos.id;
-  
-      let url = '/usuarios';
-      let tipoPeticion: 'POST' | 'PUT' = 'POST';
-  
-      if (id && id !== 0) {
-        this.cargadoServicio.open('Actualizando registro...');
-        url = `/usuarios/${id}`;   
-        tipoPeticion = 'PUT';
-      }else{
-        this.cargadoServicio.open('Creando registro...');
-      }
-  
-      this.peticionServicio
-      .peticion(url, datos, tipoPeticion)
-      .subscribe({
-        next: (data) => {
-          if (data.error) {
-            this.toastService.show(data.mensaje, 'danger');
-          } else {
-            this.toastService.show(data.mensaje, 'success');
-            this.router.navigateByUrl('/usuarios');
-          }
-        }
-      });
-      setTimeout(()=>{
-        this.cargadoServicio.close()
-      },1000)
-      
-    } */
   
     retornaError(campo: string) {
       const control = this.formulario.get(campo);

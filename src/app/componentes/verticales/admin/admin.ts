@@ -19,12 +19,12 @@ export class Admin {
         {
           label: 'Registrar',
           icon: 'bi bi-people',
-          link: '/usuarios'
+          link: '/principal/crear-editar-usuario'
         },
         {
           label: 'Listar',
           icon: 'bi bi-shield-lock',
-          link: '/listar'
+          link: '/principal/usuarios'
         }
       ]
     },
@@ -41,7 +41,13 @@ export class Admin {
           label: 'Empresas',
           icon: 'bi bi-bell',
           link: '/principal/empresas'
+        },
+        {
+          label: 'Localidades',
+          icon: 'bi bi-bell',
+          link: '/principal/localidades'
         }
+
       ]
     }
   ];

@@ -5,44 +5,50 @@ import { RetornaErrorServicio } from '../../../../servicios/retorna-error-servic
 import { ToastServicio } from '../../../../servicios/toast-servicio';
 import { PeticionServicio } from '../../../../servicios/peticion-servicio';
 import { CargandoServicio } from '../../../../servicios/cargando-servicio';
+import { DatosTempServicios } from '../../../../servicios/datos-temp-servicios';
 
 @Component({
-  selector: 'app-crear-editar-roles',
-  standalone: true,
+  selector: 'app-crear-editar-localidades',
   imports: [RouterLink, ReactiveFormsModule],
-  templateUrl: './crear-editar-roles.html',
-  styleUrl: './crear-editar-roles.css',
+  templateUrl: './crear-editar-localidades.html',
+  styleUrl: './crear-editar-localidades.css',
 })
-export class CrearEditarRoles implements OnInit {
-
-  private fb = inject(FormBuilder);
-  private retornaErrorService = inject(RetornaErrorServicio);
-  private toastService = inject(ToastServicio);
-  private peticionServicio = inject(PeticionServicio);
-  private router = inject(Router);
+export class CrearEditarLocalidades {
+  private fb = inject(FormBuilder)
+  private retornaErrorService = inject(RetornaErrorServicio)
+  private toastService = inject(ToastServicio)
+  private peticionServicio = inject(PeticionServicio)
+  private router = inject(Router)
   private cargadoServicio = inject(CargandoServicio)
+  private datosTempServicio = inject(DatosTempServicios)
 
   mensaje: string = '';
-  rol: any = null;
+  localidades: any = null;
+  tituloFormulario = "Crear localidad"
 
   formulario = this.fb.group({
     id: [0],
-    rol: ['', [Validators.required, Validators.minLength(2)]],
+    localidad: ['', [Validators.required, Validators.minLength(2)]],
+    id_ciudad: [this.datosTempServicio.id_ciudad(), [Validators.required]],
+    p_cardinal: ['', [Validators.required]],
+    ciudad: [{value: this.datosTempServicio.ciudad(), disabled: true}, [Validators.required]],
   });
 
   ngOnInit(): void {
-    this.rol = history.state?.datos;
-
-    if (this.rol) {
+    this.localidades = history.state?.datos;
+    if (this.localidades) {
       this.formulario.patchValue({
-        id: this.rol.id,
-        rol: this.rol.rol,
+        id: this.localidades.id,
+        localidad: this.localidades.localidad,
+        p_cardinal: this.localidades.p_cardinal,
+        id_ciudad: this.datosTempServicio.id_ciudad() 
       });
+      this.tituloFormulario = "Editar localidad"
     }
+   
   }
 
   aceptar(): void {
-    
     if (this.formulario.invalid) {
       this.formulario.markAllAsTouched();
       this.toastService.show(
@@ -55,12 +61,12 @@ export class CrearEditarRoles implements OnInit {
     const datos = this.formulario.value;
     const id = datos.id;
 
-    let url = '/roles';
+    let url = '/localidades';
     let tipoPeticion: 'POST' | 'PUT' = 'POST';
 
     if (id && id !== 0) {
       this.cargadoServicio.open('Actualizando registro...');
-      url = `/roles/${id}`;   
+      url = `/localidades/${id}`;   
       tipoPeticion = 'PUT';
     }else{
       this.cargadoServicio.open('Creando registro...');
@@ -74,10 +80,11 @@ export class CrearEditarRoles implements OnInit {
           this.toastService.show(data.mensaje, 'danger');
         } else {
           this.toastService.show(data.mensaje, 'success');
-          this.router.navigateByUrl('/principal/roles');
+          this.router.navigateByUrl('/principal/localidades');
         }
       },
       error: (err) => {
+        console.log(err)
         this.cargadoServicio.close()
         if (err?.errores) {
           // Recorremos todos los campos

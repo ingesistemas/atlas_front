@@ -5,29 +5,29 @@
             <h5 class="card-header tituloFormulario">Ingresar al sistema</h5>
             <div class="card-body">
                 <div class="contieneInput">
-                    <label for="">NIT</label>
+                    <label>NIT</label>
                     <input class="form-control form-control-sm mInput" type="text" formControlName="nit">
                     <small class="smallError">{{ retornaError('nit')}}</small>
                 </div>
 
                 <div class="contieneInput">
-                    <label for="">Email</label>
+                    <label>Email</label>
                     <input class="form-control form-control-sm mInput" type="email" formControlName="email">
                     <small class="smallError">{{ retornaError('email')}}</small>
                 </div>
 
                 <div class="contieneInput">
-                    <label for="">Contraseña</label>
+                    <label>Contraseña</label>
                     <input class="form-control form-control-sm mInput" type="password" formControlName="clave">
                     <small class="smallError">{{ retornaError('clave')}}</small>
                 </div>
 
                 <div class="card-footer btn-group">
                     <button (click)="ingresar()" class="btn btn-sm boton">Ingresar</button>
-                    <button routerLink="/principal/roles" class="btn btn-sm botonCancelar">Cancelar</button>
+                    <button routerLink="/" class="btn btn-sm botonCancelar">Cancelar</button>
                 </div>   
             </div>
         </div>
     </form>
-    
+    <app-toast></app-toast>
 </div>

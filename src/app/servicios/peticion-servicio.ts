@@ -18,7 +18,7 @@ export class PeticionServicio {
     datos: any,
     tipoPeticion: 'POST' | 'PUT' | 'GET' | 'DELETE'
   ): Observable<any> {
-
+    
     switch (tipoPeticion) {
       case 'POST':
         return this.peticionPOST(url, datos);
@@ -39,7 +39,7 @@ export class PeticionServicio {
     }
   }
 
-  private peticionPOST(url: string, datos: any): Observable<any> {
+  /* private peticionPOST(url: string, datos: any): Observable<any> {
     const headers = new HttpHeaders({});
     return this.http.post<any>(this.apiUrl + url, datos, { headers }).pipe(
       map(res => res),
@@ -72,47 +72,58 @@ export class PeticionServicio {
       map(res => res),
        catchError(err => throwError(() => err.error)) // <-- Cambio
     );
+  } */
+
+  /* CON TOKEN */
+  private peticionPOST(url: string, datos: any): Observable<any> {
+    const token = localStorage.getItem('token') || ''
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token
+    });
+    return this.http.post<any>(this.apiUrl + url, datos, { headers }).pipe(
+      map(res => res),
+      catchError(err => throwError(() => err.error)) // <-- Cambio
+    );
+  }
+
+  private peticionPUT(url: string, datos: any): Observable<any> {
+    const token = localStorage.getItem('token') || ''
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token
+    });
+    return this.http.put<any>(this.apiUrl + url, datos, { headers }).pipe(
+      map(res => res),
+      catchError(err => throwError(() => err.error)) // <-- Cambio
+    );
+  }
+
+  private peticionDELETE(url: string, datos: any): Observable<any> {
+    const token = localStorage.getItem('token') || ''
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token
+    });
+
+    return this.http.delete<any>(this.apiUrl + url, {
+      headers,
+      body: datos
+    }).pipe(
+      map(res => res),
+      catchError(err => throwError(() => err.error)) // <-- Cambio
+    );
+  }
+
+  private peticionGET(url: string): Observable<any> {
+    const token = localStorage.getItem('token') || ''
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token
+    });
+
+    return this.http.get<any>(this.apiUrl + url,{
+      headers
+    }).pipe(
+      map(res => res),
+       catchError(err => throwError(() => err.error)) // <-- Cambio
+    );
   }
 }
 
-
-
-
-/* peticionPOSTToken(url: string, datos:any){
-      let jwtToken = this.autenticaServicio.tokenActual()
-      if (!jwtToken) {
-        console.error('Token JWT ausente');
-        return throwError(() => new Error('No hay token de autenticación.'));
-      }else{
-        const headers = new HttpHeaders({
-          'Authorization': `Bearer ${jwtToken}`
-        });
-  
-        return this.http.post<IRespuesta>(this.apiUrl + url, datos, { headers }).pipe(
-          map(response => response), // asumimos que la API devuelve { status, data }
-          catchError(error => {
-            return throwError(() => new Error('No se pudieron cargar los datos.', error));
-          })
-        );
-      }
-    }
-  
-    peticionGETToken(url: string){
-      let jwtToken = this.autenticaServicio.tokenActual()
-      if (!jwtToken) {
-        console.error('Token JWT ausente');
-        return throwError(() => new Error('No hay token de autenticación.'));
-      }else{
-        const headers = new HttpHeaders({
-          'Authorization': `Bearer ${jwtToken}`
-        });
-  
-        return this.http.get<IRespuesta>(this.apiUrl + url, { headers }).pipe(
-          map(response => response), // asumimos que la API devuelve { status, data }
-          catchError(error => {
-            console.error('Error al obtener comandos:', error);
-            return throwError(() => new Error('No se pudieron cargar los datos.', error));
-          })
-        );
-      }
-    } */

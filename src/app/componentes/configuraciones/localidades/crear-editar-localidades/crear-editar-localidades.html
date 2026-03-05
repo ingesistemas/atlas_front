@@ -1,0 +1,39 @@
+<div class="contenedor2">
+    <form class="formulario" [formGroup]="formulario" autocomplete="off">
+        <div class="card">
+            <h5 class="card-header tituloFormulario">{{ tituloFormulario }}</h5>
+            <div class="card-body">
+                <div class="contieneInput">
+                    <label for="">Localidad</label>
+                    <input class="form-control form-control-sm mInput" type="text" formControlName="localidad">
+                    <small class="smallError">{{ retornaError('localidad')}}</small>
+                </div>
+                <div class="contieneInput">
+                    <label for="">Ciudad</label>
+                    <input class="form-control form-control-sm mInput" type="text" formControlName="ciudad">
+                    <small class="smallError">{{ retornaError('id_ciudad')}}</small>
+                </div>
+                <div class="contieneInput">
+                    <label for="">Punto cardinal</label>
+                    <select class="form-select form-select-sm mInput" formControlName="p_cardinal">
+                        <option value="">Selecciones...</option>
+                        <option value="N">Norte</option>
+                        <option value="S">Sur</option>
+                        <option value="O">Oriente</option>
+                        <option value="OC">Occidente</option>
+                        <option value="C">Centro</option>
+                        <option value="NO">Nororiente</option>
+                        <option value="NOC">Noroccidente</option>
+                        <option value="SO">Suroriente</option>
+                        <option value="SOC">Suroccidente</option>
+                    </select>
+                    <small class="smallError">{{ retornaError('p_cardinal')}}</small>
+                </div>
+                <div class="card-footer btn-group">
+                    <button (click)="aceptar()" class="btn btn-sm boton">Aceptar</button>
+                    <button routerLink="/principal/localidades" class="btn btn-sm botonCancelar">Cancelar</button>
+                </div>   
+            </div>
+        </div>
+    </form>
+</div>
