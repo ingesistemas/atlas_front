@@ -37,7 +37,7 @@ export interface ItemTabla {
   styleUrl: './listar-localidades.css',
 })
 export class ListarLocalidades {
-  displayedColumns: string[] = ['localidad', 'p_cardinal', 'create_at', 'opciones'];
+  displayedColumns: string[] = ['localidad', 'p_cardinal', 'id_ficha_tecnica', 'create_at', 'opciones'];
   dataSource: MatTableDataSource<ItemTabla> = new MatTableDataSource<ItemTabla>([]);
   mensaje: string = '';
   datos: any = [];
@@ -54,11 +54,13 @@ export class ListarLocalidades {
     // 🔹 Filtro personalizado
     this.dataSource.filterPredicate = (data: ItemTabla, filter: string) => {
       const texto = filter.trim().toLowerCase();
+      const pCardinal = this.pCardinalTransform(data.p_cardinal).toLowerCase();
       return (
         data.id.toString().toLowerCase().includes(texto) ||
         data.localidad.toLowerCase().includes(texto) ||
         data.p_cardinal.toLowerCase().includes(texto) ||
-        (data.created_at?.toLowerCase().includes(texto) ?? false)
+        (data.created_at?.toLowerCase().includes(texto) ?? false) ||
+        pCardinal.includes(texto)
       );
     };
 
@@ -90,11 +92,12 @@ export class ListarLocalidades {
     const id = localidad.id;
 
     this.peticionServicio
-    .peticion(`/localidad/${id}`, null, 'DELETE')
+    .peticion(`/localidades/${id}`, null, 'DELETE')
     .subscribe({
       next: (resp) => {
+        console.log(resp)
         this.mensaje = resp.mensaje;
-
+        
         // 🔹 1. Copia del array
         const data = [...this.dataSource.data];
 
@@ -119,6 +122,22 @@ export class ListarLocalidades {
     
   }
 
+  pCardinalTransform(valor: string): string {
+    switch(valor){
+      case 'N': return 'Norte';
+      case 'S': return 'Sur';
+      case 'O': return 'Oriente';
+      case 'OC': return 'Occidente';
+      case 'C': return 'Centro';
+      case 'NO': return 'Nororiente';
+      case 'NOC': return 'Noroccidente';
+      case 'SO': return 'Suroriente';
+      case 'SOC': return 'Suroccidente'
+
+      default: return valor;
+    }
+  }
+
 
   // 🔹 PETICIÓN USANDO EL MÉTODO UNIFICADO
   peticion(url: string): void {
@@ -126,6 +145,7 @@ export class ListarLocalidades {
     .peticion(url, this.datos, 'GET')
     .subscribe({
       next: (data) => {
+        console.log(data)
         this.mensaje = data.mensaje;
         this.dataSource.data = data.data;
       }

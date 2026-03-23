@@ -31,7 +31,7 @@ export class CrearEditarLocalidades {
     localidad: ['', [Validators.required, Validators.minLength(2)]],
     id_ciudad: [this.datosTempServicio.id_ciudad(), [Validators.required]],
     p_cardinal: ['', [Validators.required]],
-    ciudad: [{value: this.datosTempServicio.ciudad(), disabled: true}, [Validators.required]],
+    ciudad: [{value: this.datosTempServicio.ciudad(), disabled: true}, [Validators.required]]
   });
 
   ngOnInit(): void {

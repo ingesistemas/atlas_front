@@ -32,53 +32,19 @@ export class PeticionServicio {
       case 'DELETE':
         return this.peticionDELETE(url, datos);
 
-        
-
       default:
         return throwError(() => new Error('Tipo de petición no válido'));
     }
   }
 
-  /* private peticionPOST(url: string, datos: any): Observable<any> {
-    const headers = new HttpHeaders({});
-    return this.http.post<any>(this.apiUrl + url, datos, { headers }).pipe(
-      map(res => res),
-      catchError(err => throwError(() => err.error)) // <-- Cambio
-    );
-  }
-
-  private peticionPUT(url: string, datos: any): Observable<any> {
-    const headers = new HttpHeaders({});
-    return this.http.put<any>(this.apiUrl + url, datos, { headers }).pipe(
-      map(res => res),
-      catchError(err => throwError(() => err.error)) // <-- Cambio
-    );
-  }
-
-  private peticionDELETE(url: string, datos: any): Observable<any> {
-    const headers = new HttpHeaders({});
-
-    return this.http.delete<any>(this.apiUrl + url, {
-      headers,
-      body: datos
-    }).pipe(
-      map(res => res),
-      catchError(err => throwError(() => err.error)) // <-- Cambio
-    );
-  }
-
-  private peticionGET(url: string): Observable<any> {
-    return this.http.get<any>(this.apiUrl + url).pipe(
-      map(res => res),
-       catchError(err => throwError(() => err.error)) // <-- Cambio
-    );
-  } */
-
   /* CON TOKEN */
   private peticionPOST(url: string, datos: any): Observable<any> {
     const token = localStorage.getItem('token') || ''
+    const ficha = localStorage.getItem('ficha_activa')
+    //const ficha = '9'
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + token
+      'Authorization': 'Bearer ' + token,
+      'X-Ficha-Tecnica': ficha ?? ''
     });
     return this.http.post<any>(this.apiUrl + url, datos, { headers }).pipe(
       map(res => res),
@@ -88,8 +54,11 @@ export class PeticionServicio {
 
   private peticionPUT(url: string, datos: any): Observable<any> {
     const token = localStorage.getItem('token') || ''
+    const ficha = localStorage.getItem('ficha_activa')
+    //const ficha = '9'
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + token
+      'Authorization': 'Bearer ' + token,
+      'X-Ficha-Tecnica': ficha ?? ''
     });
     return this.http.put<any>(this.apiUrl + url, datos, { headers }).pipe(
       map(res => res),
@@ -99,8 +68,11 @@ export class PeticionServicio {
 
   private peticionDELETE(url: string, datos: any): Observable<any> {
     const token = localStorage.getItem('token') || ''
+    const ficha = localStorage.getItem('ficha_activa')
+    //const ficha = '9'
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + token
+      'Authorization': 'Bearer ' + token,
+      'X-Ficha-Tecnica': ficha ?? ''
     });
 
     return this.http.delete<any>(this.apiUrl + url, {
@@ -114,8 +86,11 @@ export class PeticionServicio {
 
   private peticionGET(url: string): Observable<any> {
     const token = localStorage.getItem('token') || ''
+    const ficha = localStorage.getItem('ficha_activa')
+    //const ficha = '9'
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + token
+      'Authorization': 'Bearer ' + token,
+      'X-Ficha-Tecnica': ficha ?? ''
     });
 
     return this.http.get<any>(this.apiUrl + url,{
