@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Injectable } from '@angular/core'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { Observable, throwError } from 'rxjs'
+import { catchError, map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
 })
 export class PeticionServicio {
 
-  private apiUrl = 'http://127.0.0.1:8000/api';
+  private apiUrl = 'http://127.0.0.1:8000/api'
+  private ficha = localStorage.getItem('ficha_activa')
+  //private ficha = '9'
 
   constructor(private http: HttpClient) {}
 
@@ -40,11 +42,19 @@ export class PeticionServicio {
   /* CON TOKEN */
   private peticionPOST(url: string, datos: any): Observable<any> {
     const token = localStorage.getItem('token') || ''
+<<<<<<< HEAD
     const ficha = localStorage.getItem('ficha_activa')
     //const ficha = '9'
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token,
       'X-Ficha-Tecnica': ficha ?? ''
+=======
+    //const ficha = localStorage.getItem('ficha_activa')
+    //const ficha = '9'
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'X-Ficha-Tecnica': this.ficha ?? ''
+>>>>>>> 9ce6731 (Establecer localstorage en localidades)
     });
     return this.http.post<any>(this.apiUrl + url, datos, { headers }).pipe(
       map(res => res),
@@ -54,11 +64,19 @@ export class PeticionServicio {
 
   private peticionPUT(url: string, datos: any): Observable<any> {
     const token = localStorage.getItem('token') || ''
+<<<<<<< HEAD
     const ficha = localStorage.getItem('ficha_activa')
     //const ficha = '9'
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token,
       'X-Ficha-Tecnica': ficha ?? ''
+=======
+    //const ficha = localStorage.getItem('ficha_activa')
+    //const ficha = '9'
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'X-Ficha-Tecnica': this.ficha ?? ''
+>>>>>>> 9ce6731 (Establecer localstorage en localidades)
     });
     return this.http.put<any>(this.apiUrl + url, datos, { headers }).pipe(
       map(res => res),
@@ -68,11 +86,19 @@ export class PeticionServicio {
 
   private peticionDELETE(url: string, datos: any): Observable<any> {
     const token = localStorage.getItem('token') || ''
+<<<<<<< HEAD
     const ficha = localStorage.getItem('ficha_activa')
     //const ficha = '9'
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token,
       'X-Ficha-Tecnica': ficha ?? ''
+=======
+    //const ficha = localStorage.getItem('ficha_activa')
+    //const ficha = '9'
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'X-Ficha-Tecnica': this.ficha ?? ''
+>>>>>>> 9ce6731 (Establecer localstorage en localidades)
     });
 
     return this.http.delete<any>(this.apiUrl + url, {
@@ -86,11 +112,19 @@ export class PeticionServicio {
 
   private peticionGET(url: string): Observable<any> {
     const token = localStorage.getItem('token') || ''
+<<<<<<< HEAD
     const ficha = localStorage.getItem('ficha_activa')
     //const ficha = '9'
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token,
       'X-Ficha-Tecnica': ficha ?? ''
+=======
+    //const ficha = localStorage.getItem('ficha_activa')
+    //const ficha = '9'
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'X-Ficha-Tecnica': this.ficha ?? ''
+>>>>>>> 9ce6731 (Establecer localstorage en localidades)
     });
 
     return this.http.get<any>(this.apiUrl + url,{

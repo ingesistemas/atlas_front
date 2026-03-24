@@ -7,6 +7,7 @@ import { CargandoServicio } from '../../servicios/cargando-servicio';
 import { ToastServicio } from '../../servicios/toast-servicio';
 import { DatosTempServicios } from '../../servicios/datos-temp-servicios';
 import { Toast } from "../toast/toast";
+import { CatalogosLocales } from '../../servicios/catalogos-locales';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class Ingresar {
     private router = inject(Router);
     private cargadoServicio = inject(CargandoServicio)
     private datosTemServicio = inject(DatosTempServicios)
+    private catalogosServicio = inject(CatalogosLocales)
   
     mensaje: string = '';
     usuario: any = null;
@@ -77,7 +79,10 @@ export class Ingresar {
               empresa: res.user.empresa,
               ciudad: res.user.ciudad
             });
-            this.router.navigateByUrl("/principal")
+           
+            this.catalogosServicio.actualizarCatalogos(() => {
+              this.router.navigateByUrl("/principal");
+            });
           }
           
         },
