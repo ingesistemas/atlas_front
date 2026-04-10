@@ -68,7 +68,7 @@ export class Ingresar {
             this.toastService.show(res.mensaje, 'success')
             localStorage.setItem('token', res.token);
             //console.log('TOKEN GUARDADO:', res.token);
-            console.log(res)
+            //console.log(res)
 
             // 2️⃣ Guardas el usuario en el estado (SIGNAL)
             this.datosTemServicio.setUser({
@@ -87,7 +87,7 @@ export class Ingresar {
           
         },
         error: (err) => {
-          console.error(err);
+          //console.error(err);
           setTimeout(()=>{
             this.cargadoServicio.close()
           },1000)

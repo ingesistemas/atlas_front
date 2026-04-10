@@ -2,3 +2,23 @@
   /*background-color: rgb(111, 111, 111) !important;
   opacity: 0.5 !important;*/
 }
+
+.modal-content{
+  margin-top: 200px !important;
+}
+
+.exitoso{
+  color: rgb(9, 200, 168);
+}
+
+.error{
+  color: red;
+}
+
+.advertencia{
+  color: orange;
+}
+
+.mensaje{
+  color: rgb(118, 118, 118);
+}

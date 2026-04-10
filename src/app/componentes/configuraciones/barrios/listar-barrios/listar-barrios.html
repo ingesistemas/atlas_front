@@ -1,26 +1,26 @@
 <div class="contenedor2"> 
     <div class="mat-elevation-z8 contieneTabla">
         <div class="d-flex align-items-center justify-content-between">
-            <h1 class="tituloContenedor">Localidades</h1>
+            <h1 class="tituloContenedor">Barrios</h1>
             <mat-form-field class="contieneFiltro" appearance="outline">
                 <mat-label>Buscar por...</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Buscar por..." #input >
             </mat-form-field>
-            <button class="btn boton" routerLink="/principal/crear-editar-localidad">
-                Crear localidad
+            <button class="btn boton" routerLink="/principal/crear-editar-barrio">
+                Crear barrio
             </button>
         </div>
 
         <table mat-table [dataSource]="dataSource" matSort>
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-                <td mat-cell *matCellDef="let row" [ngClass]="{'inactivo': row.activo}"> {{row.id}}</td>
+            <!-- Rol Column -->
+            <ng-container matColumnDef="barrio">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Barrio </th>
+                <td mat-cell *matCellDef="let row" [ngClass]="{'inactivo': row.activo}"> {{row.barrio}}</td>
             </ng-container>
 
-            <!-- Nombre Localidad -->
             <ng-container matColumnDef="localidad">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Localidad </th>
-                <td mat-cell *matCellDef="let row" [ngClass]="{'inactivo': row.activo}"> {{row.localidad}}</td>
+                <td mat-cell *matCellDef="let row" [ngClass]="{'inactivo': row.activo}"> {{row.localidad.localidad}}</td>
             </ng-container>
 
             <!-- PUNTO CARDINAL -->

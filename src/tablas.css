@@ -6,14 +6,16 @@ table {
 }
 
 .headerTabla{
-  background-color: #009bc6 !important;
-  color: #FFF !important;
-  border: 1px solid #009bc6 !important;
+ /*  background-color: #34aecf !important; */
+ background: linear-gradient(to bottom, #ffffff 3%, #34aecf 15%, #34aecf 100%) !important;
+  /*background-color: #229dce !important;*/
+
+  color: #ffffff !important;
+  border: 1px solid #34aecf !important;
 }
 
 .mat-mdc-form-field {
   font-size: 14px !important;
-  
 }
 
 .fila-par {

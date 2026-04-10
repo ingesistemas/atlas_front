@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   styleUrl: './cargando.css',
 })
 export class Cargando {
+  spinnerColor = '#34aecf';
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { mensaje?: string }
   ) {}

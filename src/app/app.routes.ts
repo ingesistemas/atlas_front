@@ -11,6 +11,9 @@ import { authGuard } from './guards/auth.guard';
 import { CrearEditarUsuario } from './componentes/configuraciones/usuarios/crear-editar-usuario/crear-editar-usuario';
 import { ListarLocalidades } from './componentes/configuraciones/localidades/listar-localidades/listar-localidades';
 import { CrearEditarLocalidades } from './componentes/configuraciones/localidades/crear-editar-localidades/crear-editar-localidades';
+import { ListarBarrios } from './componentes/configuraciones/barrios/listar-barrios/listar-barrios';
+import { CrearEditarBarrio } from './componentes/configuraciones/barrios/crear-editar-barrio/crear-editar-barrio';
+
 
 
 export const routes: Routes = [
@@ -35,8 +38,8 @@ export const routes: Routes = [
       { path: 'crear-editar-rol', component: CrearEditarRoles },
       { path: 'empresas', component: ListarEmpresas },
       { path: 'crear-editar-empresas', component: CrearEditarEmpresas },
+      { path: 'barrios', component: ListarBarrios },
+      { path: 'crear-editar-barrio', component: CrearEditarBarrio},
     ]
   },
-
-  
 ];

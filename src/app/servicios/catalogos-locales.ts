@@ -25,7 +25,7 @@ export class CatalogosLocales {
     };
 
     this.cargarCatalogo('/localidades', 'localidades', finalizar);
-    //this.cargarCatalogo('/barrios', 'barrios', finalizar);
+    this.cargarCatalogo('/barrios', 'barrios', finalizar);
   }
 
   private cargarCatalogo(url: string, clave: string, done: () => void): void {

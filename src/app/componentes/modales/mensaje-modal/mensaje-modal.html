@@ -3,18 +3,17 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-            <div class="modal-header">
-                <h5 class="modal-title">{{ data?.titulo }}</h5>
-                <button type="button" class="btn-close" (click)="cerrar()"></button>
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" [ngClass]="data?.tipo">{{ data?.titulo }}</h5>
+                </div>
 
-            <div class="modal-body">
-                {{ data?.mensaje }}
-            </div>
+                <div class="modal-body mensaje">
+                    {{ data?.mensaje }}
+                </div>
 
-            <div class="modal-footer">
-                <button class="btn btn-success" (click)="cerrar()">Cerrar</button>
-            </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm boton" (click)="cerrar()">Cerrar</button>
+                </div>
 
             </div>
         </div>

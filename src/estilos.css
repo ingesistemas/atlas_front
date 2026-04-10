@@ -1,12 +1,18 @@
 :root{
-    --primary:#0f4c81;
-    --secondary:#1cc8a0;
+     /*--primary:#006ea4;  ACTUAL */
+   /* --primary:#0f4c81;*/
+    /*--secondary:#1cc8a0;*/
+   /* --secondary:#3cacf1; ACTUAL*/
     --accent:#facc15;
     --bg:#f4f7fb;
     --dark:#0f172a;
     --muted:#64748b;
     --green: #15a7cc;
     --blue: #003e9a;
+
+    --primary:#46d8f2; 
+
+    --secondary:#1f9db6;
 }
 
 *{
@@ -59,24 +65,24 @@ nav a{
     background:linear-gradient(135deg,var(--primary),var(--secondary));
     color:white;
     padding:10px 20px;
-    border-radius:30px;
+    border-radius:10px;
     border: none;
 }
 
-.boton, .botonCancelar{
+.botonCancelar{
     background:linear-gradient(135deg,var(--green));
     border-radius:10px;
 }
 
 .cta:hover, .boton:hover{
     color:white;
-    background: #009f8f;
+    background:linear-gradient(135deg,var(--secondary),var(--green));
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 .botonCancelar{
-    background: #f1f1f1;
-    color: #ff7700;
+    background: #e1e1e1;
+    color: #ff4400;
 }
 
 .botonCancelar:hover{
@@ -95,9 +101,13 @@ nav a{
 .hero{
     padding:160px 20px 120px;
     background:
-      radial-gradient(circle at top right,#c7f9cc,transparent 40%),
-      radial-gradient(circle at bottom left,#bae6fd,transparent 40%),
-      white;
+        radial-gradient(circle at top right,#76abc7,transparent 40%),
+         radial-gradient(circle at bottom left,#9ab5c4,transparent 40%),
+      rgb(255, 255, 255);
+    /* background:
+        radial-gradient(circle at top right,#c7f9cc,transparent 40%),
+         radial-gradient(circle at bottom left,#bae6fd,transparent 40%),
+      white; */
 }
 
 .hero-grid{

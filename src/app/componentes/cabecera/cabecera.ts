@@ -27,6 +27,7 @@ export class Cabecera {
     this.cargandoServicio.open("Cerrando sesión.")
     localStorage.removeItem('token')
     this.datosTempServicio.clear()
+    localStorage.clear()
     
     timer(2500).subscribe(() => {
       this.toastServicio.show('Sesión cerrada con éxito.', 'success');

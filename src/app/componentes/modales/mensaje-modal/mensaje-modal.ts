@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core'
 import { ModalServicio } from '../../../servicios/modal-servicio'
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-mensaje-modal',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './mensaje-modal.html',
   styleUrl: './mensaje-modal.css',
 })

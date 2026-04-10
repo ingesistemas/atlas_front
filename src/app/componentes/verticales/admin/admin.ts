@@ -46,8 +46,12 @@ export class Admin {
           label: 'Localidades',
           icon: 'bi bi-bell',
           link: '/principal/localidades'
+        },
+        {
+          label: 'Barrios',
+          icon: 'bi bi-bell',
+          link: '/principal/barrios'
         }
-
       ]
     }
   ];

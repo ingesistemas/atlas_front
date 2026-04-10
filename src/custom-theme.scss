@@ -33,3 +33,9 @@ body {
   // Reset the user agent margin.
   margin: 0;
 }
+
+:root {
+  @include mat.progress-spinner-overrides((
+    active-indicator-color: #15a7cc,
+  ));
+}

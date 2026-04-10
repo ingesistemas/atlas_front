@@ -15,16 +15,18 @@ import { ModalServicio } from "../../../../servicios/modal-servicio"
 
 export interface ItemTabla {
   id: string
-  localidad: string
-  p_cardinal: string
+  barrio: string
+  id_ficha_tecnica: number,
+  localidad: string,
+  p_cardinal: string,
+  alerta: number,
   activo: number
   created_at: string
 }
 
 @Component({
-  selector: 'app-listar-localidades',
-  imports: [
-    RouterLink,
+  selector: 'app-listar-barrios',
+  imports: [RouterLink,
     MatFormFieldModule,
     MatTableModule,
     MatPaginatorModule,
@@ -33,13 +35,12 @@ export interface ItemTabla {
     DatePipe,
     CommonModule,
     MatTooltipModule,
-    PCardinalPipe
-  ],
-  templateUrl: './listar-localidades.html',
-  styleUrl: './listar-localidades.css',
+    PCardinalPipe],
+  templateUrl: './listar-barrios.html',
+  styleUrl: './listar-barrios.css',
 })
-export class ListarLocalidades {
-  displayedColumns: string[] = ['id', 'localidad', 'p_cardinal', 'id_ficha_tecnica', 'create_at', 'opciones'];
+export class ListarBarrios {
+  displayedColumns: string[] = ['barrio', 'localidad', 'p_cardinal', 'id_ficha_tecnica', 'create_at', 'opciones'];
   dataSource: MatTableDataSource<ItemTabla> = new MatTableDataSource<ItemTabla>([]);
   mensaje: string = '';
   datos: any = [];
@@ -59,17 +60,16 @@ export class ListarLocalidades {
     // 🔹 Filtro personalizado
     this.dataSource.filterPredicate = (data: ItemTabla, filter: string) => {
       const texto = filter.trim().toLowerCase();
-      const pCardinal = this.pCardinalTransform(data.p_cardinal).toLowerCase();
       return (
         data.id.toString().toLowerCase().includes(texto) ||
-        data.localidad.toLowerCase().includes(texto) ||
+        data.barrio.toLowerCase().includes(texto) ||
+        data.id_ficha_tecnica.toString().toLowerCase().includes(texto) ||
         data.p_cardinal.toLowerCase().includes(texto) ||
-        (data.created_at?.toLowerCase().includes(texto) ?? false) ||
-        pCardinal.includes(texto)
+        (data.created_at?.toLowerCase().includes(texto) ?? false)
       );
     };
 
-    this.peticion('/localidades')
+    this.peticion('/barrios')
   }
 
   ngAfterViewInit(): void {
@@ -86,26 +86,26 @@ export class ListarLocalidades {
     }
   }
 
-  editar(localidad: any): void {
-    if (localidad.activo == 1){
+  editar(barrio: any): void {
+    if (barrio.activo == 1){
       this.modalMensajeServicio.abrirModal({
         titulo: 'Atlas advierte que:',
         mensaje: 'El registro está inactivo, por tanto no se puede editar.',
         tipo: 'advertencia'
       })
     }else{
-        this.router.navigate(['/principal/crear-editar-localidad'], {
-        state: { datos: localidad }
+        this.router.navigate(['/principal/crear-editar-barrio'], {
+        state: { datos: barrio }
       })
     }
   }
 
-  estado(localidad: any): void {
+  estado(barrio: any): void {
     this.cargadoServicio.open('Actualizando estado...')
-    const id = localidad.id
+    const id = barrio.id
 
     this.peticionServicio
-    .peticion(`/localidades/${id}`, null, 'DELETE')
+    .peticion(`/barrios/${id}`, null, 'DELETE')
     .subscribe({
       next: (resp) => {
         this.mensaje = resp.mensaje;
@@ -113,11 +113,11 @@ export class ListarLocalidades {
         // 🔹 1. Copia del array
         const data = [...this.dataSource.data]
 
-        // 🔹 2. Buscar índice de la localidad
+        // 🔹 2. Buscar índice de la barrio
         const index = data.findIndex(r => r.id === id)
 
         if (index !== -1) {
-          // 🔹 3. Reemplazar con la localidad actualizado
+          // 🔹 3. Reemplazar con la barrio actualizado
           data[index] = {
             ...data[index],
             activo: resp.data.activo
@@ -158,14 +158,15 @@ export class ListarLocalidades {
     .peticion(url, this.datos, 'GET')
     .subscribe({
       next: (data) => {
+        console.log(data)
         this.mensaje = data.mensaje
         this.dataSource.data = data.data
-        localStorage.setItem('localidades', JSON.stringify(data.data))
+        localStorage.setItem('barrios', JSON.stringify(data.data))
         this.toastMensajeServicio.show(this.mensaje, "success");
       },
       error: (err) => {
         this.mensaje = 'No se pudo obtener la información.'
-        const data = localStorage.getItem('localidades')
+        const data = localStorage.getItem('barrios')
         this.dataSource.data = data ? JSON.parse(data) : []
         this.mensaje = 'Datos cargados localmente'
         this.cargadoServicio.close()

@@ -4,7 +4,12 @@
 
 .formulario{
     margin: 0px auto;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+   /*  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;  */
+    
+
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px; 
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
     border-radius: 15px;
 }
 
@@ -51,4 +56,15 @@ label{
 
 select{
     cursor: pointer;
+}
+
+.mInput option {
+  color: #0596b7;
+  background-color: #f9f9f9;
+}
+
+.mInput option:checked {
+  background-color: #34aecf;
+
+  color: white;
 }
